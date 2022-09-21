@@ -1,0 +1,16 @@
+[package]
+name = "math-symbols"
+version = "0.1.0"
+edition = "2021"
+description = "Symbols for computer algebra"
+authors = ["Andreas Maier <andreas.martin.maier@desy.de>"]
+license = "GPL-3.0-or-later"
+readme = "Readme.md"
+# keywords = ["physics", "graph-algorithms"]
+# categories = ["science"]
+# repository = "https://github.com/a-maier/dynasty"
+
+[dependencies]
+ahash = "0.8"
+lazy_static = "1.4"
+serde = { version = "1.0", features = ["derive"] }
