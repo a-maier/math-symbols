@@ -1,3 +1,29 @@
+//! Named symbols for use in compute algebra systems. Symbol names are
+//! stored centrally such that copies are cheap and need little
+//! memory.
+//!
+//! # Example
+//!
+//! ```rust
+//! use math_symbols::*;
+//!
+//! // Define a number of symbols with variable name equal to symbol name
+//! symbols!(x, y, z);
+//! assert_eq!(x.name(), "x");
+//! assert_eq!(y.name(), "y");
+//! assert_eq!(z.name(), "z");
+//!
+//! // Symbols are identified by their names
+//! let xx = Symbol::new("x");
+//! assert_eq!(x, xx);
+//!
+//! // Symbols are ordered by their creation time
+//! assert!(x < y);
+//! ```
+//! # Similar crates
+//!
+//! - [symbol](https://crates.io/crates/symbol)
+//!
 use std::fmt::{self, Display};
 use std::sync::RwLock;
 
@@ -36,6 +62,7 @@ lazy_static! {
         RwLock::new(SymbolRegister::default());
 }
 
+/// A symbol
 #[derive(
     Copy,
     Clone,
@@ -59,6 +86,7 @@ pub struct Symbol {
 }
 
 impl Symbol {
+    /// Construct a symbol with the given name
     pub fn new<S: AsRef<str>>(name: S) -> Self {
         let name = name.as_ref();
         if let Some(idx) = SYMBOL_REGISTER.read().unwrap().try_idx(name) {
@@ -68,6 +96,7 @@ impl Symbol {
         Self { idx }
     }
 
+    /// Get the symbol's name
     pub fn name(&self) -> String {
         SYMBOL_REGISTER.read().unwrap().name(self.idx).to_owned()
     }
@@ -91,6 +120,7 @@ fn deserialize_sym<'de, D: Deserializer<'de>>(d: D) -> Result<usize, D::Error> {
     Ok(s.idx)
 }
 
+/// Construct variables with the same variable and symbol name
 #[macro_export]
 macro_rules! symbols {
     ( $( $x:ident ),* ) => {

@@ -5,10 +5,10 @@ edition = "2021"
 description = "Symbols for computer algebra"
 authors = ["Andreas Maier <andreas.martin.maier@desy.de>"]
 license = "GPL-3.0-or-later"
-# readme = "Readme.md"
-# keywords = ["physics", "graph-algorithms"]
-# categories = ["science"]
-# repository = "https://github.com/a-maier/dynasty"
+readme = "Readme.md"
+keywords = ["computer-algebra"]
+categories = ["mathematics"]
+repository = "https://github.com/a-maier/math-symbols"
 
 [dependencies]
 ahash = "0.8"
