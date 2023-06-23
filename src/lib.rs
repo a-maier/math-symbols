@@ -59,7 +59,8 @@ pub struct Symbol {
 }
 
 impl Symbol {
-    pub fn new(name: &str) -> Self {
+    pub fn new<S: AsRef<str>>(name: S) -> Self {
+        let name = name.as_ref();
         if let Some(idx) = SYMBOL_REGISTER.read().unwrap().try_idx(name) {
             return Self { idx };
         }
